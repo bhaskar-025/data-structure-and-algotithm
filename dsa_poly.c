@@ -8,7 +8,7 @@ struct node {
 };
 int main(){
 	int y=1;
-	struct node* head=NULL, *temp, *nnode,* phead=NULL, *ptemp, *pnnode;
+	struct node* head=NULL, *temp, *nnode,* phead=NULL, *ptemp, *pnnode,*result,*rtemp,*rhead=NULL;
 	while (y==1){
 		int ex;
 		printf("enter the  exponent of the term");
@@ -93,20 +93,77 @@ int main(){
 	printf("\n");
 	temp=head;
 	ptemp=phead;
+	
 	while(temp!=NULL && ptemp !=NULL){
 		if(temp->exp==ptemp->exp){
-			printf("%dx^%d+",temp->coeff+ptemp->coeff,temp->exp);
+		
+		
+			result=(struct node *)malloc(sizeof(struct node));
+			result->next=NULL;
+			result->coeff=temp->coeff+ptemp->coeff;
+			result->exp=temp->exp;
+			if(rhead==NULL){
+				rtemp=rhead=result;
+			}
+			else{
+				rtemp->next=result;
+				rtemp=result;
+			}
+				printf("%dx^%d+",result->coeff,result->exp);
 			temp=temp->next;
 			ptemp=ptemp->next;
 		}
 		else if(temp->exp > ptemp->exp){
-			printf("%dx^%d+",temp->coeff,temp->exp);
+			result=(struct node *)malloc(sizeof(struct node));
+			result->next=NULL;
+			result->coeff=temp->coeff;
+			result->exp=temp->exp;
+			if(rhead==NULL){
+				rtemp=rhead=result;
+			}
+			else{
+				rtemp->next=result;
+				rtemp=result;
+			}
+				printf("%dx^%d+",result->coeff,result->exp);
 			temp=temp->next;
 		}
-		else if(temp->exp < ptemp->exp){
-			printf("%dx^%d+",ptemp->coeff,ptemp->exp);
+		else {
+			result=(struct node *)malloc(sizeof(struct node));
+			result->next=NULL;
+			result->coeff=ptemp->coeff;
+			result->exp=ptemp->exp;
+			if(rhead==NULL){
+				rtemp=rhead=result;
+			}
+			else{
+				rtemp->next=result;
+				rtemp=result;
+			}
+				printf("%dx^%d+",result->coeff,result->exp);
 			ptemp=ptemp->next;
 		}
 	}
+	while(temp!=NULL){
+		result=(struct node *)malloc(sizeof(struct node));
+			result->next=NULL;
+			result->coeff=temp->coeff;
+			result->exp=temp->exp;
+			rtemp->next=result;
+			rtemp=result;
+			printf("%dx^%d+",result->coeff,result->exp);
+		temp=temp->next;
+	}
+		while(ptemp!=NULL){
+	result=(struct node *)malloc(sizeof(struct node));
+			result->next=NULL;
+			result->coeff=ptemp->coeff;
+			result->exp=ptemp->exp;
+			rtemp->next=result;
+			rtemp=result;
+			printf("%dx^%d+",result->coeff,result->exp);
+		ptemp=ptemp->next;
+	}
 	return 0;
 }
+
