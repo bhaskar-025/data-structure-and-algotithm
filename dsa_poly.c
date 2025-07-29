@@ -49,7 +49,8 @@ int main(){
 	}
 	// to get another polynominal
 		int p=1;
-		while (getchar() != '\n');
+		printf("\n");
+//		while (getchar() != '\n');
 	while (p==1){
 		int pex;
 		printf("enter the  exponent of the term");
@@ -86,6 +87,25 @@ int main(){
 		ptemp=ptemp->next;
 		if(ptemp!=NULL){
 			printf("+");
+		}
+	}
+	// to add the above two polynomial
+	printf("\n");
+	temp=head;
+	ptemp=phead;
+	while(temp!=NULL && ptemp !=NULL){
+		if(temp->exp==ptemp->exp){
+			printf("%dx^%d+",temp->coeff+ptemp->coeff,temp->exp);
+			temp=temp->next;
+			ptemp=ptemp->next;
+		}
+		else if(temp->exp > ptemp->exp){
+			printf("%dx^%d+",temp->coeff,temp->exp);
+			temp=temp->next;
+		}
+		else if(temp->exp < ptemp->exp){
+			printf("%dx^%d+",ptemp->coeff,ptemp->exp);
+			ptemp=ptemp->next;
 		}
 	}
 	return 0;
