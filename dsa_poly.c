@@ -8,7 +8,7 @@ struct node {
 };
 int main(){
 	int y=1;
-	struct node* head=NULL, *temp, *nnode,* phead=NULL, *ptemp, *pnnode,*result,*rtemp,*rhead=NULL;
+	struct node* head=NULL, *temp, *nnode,* phead=NULL, *ptemp, *pnnode,*result,*rtemp,*rhead=NULL,*mhead=NULL,*mtemp,*multiply;
 	while (y==1){
 		int ex;
 		printf("enter the  exponent of the term");
@@ -164,6 +164,39 @@ int main(){
 			printf("%dx^%d+",result->coeff,result->exp);
 		ptemp=ptemp->next;
 	}
+
+    //to multiply the above two polynomial
+    printf("\n");
+    temp=head;
+   
+    while(temp!=NULL){
+         ptemp=phead;
+            while(ptemp!=NULL){
+                multiply=(struct node *)malloc(sizeof(struct node));
+                multiply->next=NULL;
+                multiply->coeff=temp->coeff*ptemp->coeff;
+                multiply->exp=temp->exp + ptemp->exp;
+                if (mhead==NULL)
+                {
+                  mtemp=mhead=multiply;
+                }
+                else{
+                    mtemp->next=multiply;
+                    mtemp=multiply;
+                }
+                
+                ptemp=ptemp->next;
+            }
+
+        temp=temp->next;
+    }
+
+   
+    mtemp=mhead;
+    while(mtemp!=NULL){
+        printf("%dx^%d+",mtemp->coeff,mtemp->exp);
+        mtemp=mtemp->next;
+    }
+
 	return 0;
 }
-
