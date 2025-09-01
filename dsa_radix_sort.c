@@ -2,7 +2,7 @@
 
 int main(){
 	
-	int arr[10]={432,8,530,90,88,231,11,45,677,199};
+	int arr[10]={432,8,5308,90,88,23661,11,45,677,199};
 	int count[10];
 	int n=sizeof(arr)/sizeof(arr[0]);
 	int temp[n];
@@ -30,44 +30,21 @@ int main(){
 	}
 	printf("no of digit of max nunber is %d",nod);
 	
-	//code for unit place
+	
 	int p,c,r;
-	for(i=0;i<n;i++){
-		
-		p=arr[i];
-		c=p%10;
-		count[c]++;
-	}
-
-	for(i=1;i<10;i++){
-		count[i]+=count[i-1];
-	}
-		for(i=0;i<10;i++){
-		printf("\n%d\t",count[i]);
-	}
-
-	for(i=n-1;i>=0;i--){
-		p=arr[i];
-		c=p%10;
-		count[c]--;
-		r=count[c];
-		temp[r]=p;
-	}
-	for(i=0;i<n;i++){
-		printf("\n%d\t",temp[i]);
-	}
-	//updating array
-	for(i=0;i<n;i++){
-		arr[i]=temp[i];
-	}
-	//code for tenth place
-	for(i=0;i<10;i++){
+	
+	int w,place;
+	w=0;
+	place=1;
+	while(w<nod){
+			for(i=0;i<10;i++){
 		count[i]=0;
 	}
-		for(i=0;i<n;i++){
+	
+	for(i=0;i<n;i++){
 		
 		p=arr[i];
-		p=p/10;
+		p=p/place;
 		c=p%10;
 		count[c]++;
 	}
@@ -75,56 +52,31 @@ int main(){
 	for(i=1;i<10;i++){
 		count[i]+=count[i-1];
 	}
+	printf("\n");
+	printf("your count martrix is \n");
 		for(i=0;i<10;i++){
-		printf("\n%d\t",count[i]);
+		printf("%d\t",count[i]);
 	}
 
 	for(i=n-1;i>=0;i--){
 		p=arr[i];
-		p=p/10;
+		p=p/place;
 		c=p%10;
 		count[c]--;
 		r=count[c];
 		temp[r]=arr[i];
 	}
+	printf("\n");
+	printf("your array after sorting the %d th place\n",place);
 	for(i=0;i<n;i++){
-		printf("\n%d\t",temp[i]);
+		printf("%d\t",temp[i]);
 	}
-	
-	//for the hundreth place 
 	//updating array
 	for(i=0;i<n;i++){
 		arr[i]=temp[i];
 	}
-	//code for tenth place
-	for(i=0;i<10;i++){
-		count[i]=0;
-	}
-		for(i=0;i<n;i++){
-		
-		p=arr[i];
-		p=p/100;
-		c=p%10;
-		count[c]++;
-	}
+	w++;
+	place=place*10;
+}
 
-	for(i=1;i<10;i++){
-		count[i]+=count[i-1];
-	}
-		for(i=0;i<10;i++){
-		printf("\n%d\t",count[i]);
-	}
-
-	for(i=n-1;i>=0;i--){
-		p=arr[i];
-		p=p/100;
-		c=p%10;
-		count[c]--;
-		r=count[c];
-		temp[r]=arr[i];
-	}
-	for(i=0;i<n;i++){
-		printf("\n%d\t",temp[i]);
-	}
-	
 }
